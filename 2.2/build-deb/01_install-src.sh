@@ -41,7 +41,7 @@ mysql -uroot -p zabbix < database/mysql/images.sql
 mysql -uroot -p zabbix < database/mysql/data.sql
 
 # Notes
-adjust zabbix_server.conf -> uncomment and delete space before: PidFile=/tmp/zabbix_server.pid
+adjust zabbix_server.conf -> uncomment and delete space before: PidFile=/tmp/zabbix_server.pid (same for agentd)
 cp -a frontends/php/. /var/www/html
 Adjust php variables
 service apache2 restart
