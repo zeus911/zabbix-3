@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01a Alpha01
+# Version: 01a Alpha02
 #  Status: Not Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -17,7 +17,7 @@ DOWNDIR="/tmp"
 apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
 
 # Required Packages
-apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd
+apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping
 
 # Download Source
 wget http://softlayer-dal.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/2.2.3/zabbix-2.2.3.tar.gz
