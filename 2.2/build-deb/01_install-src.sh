@@ -13,7 +13,7 @@
 # Installer variables
 DOWNDIR="/tmp"
 MYSQLUSER="root"
-MYSQLPASS="c0ntr0l"
+MYSQLPASS="password"
 WWWPATH="/var/www/"  #Ubuntu 14.04 uses /var/www/html
 VERSION="2.2.3"
 
@@ -22,15 +22,15 @@ echo "Verifying LAMP installation..."
 dpkg --list > $DOWNDIR/dpkg.txt
 if grep -q "apache" $DOWNDIR/dpkg.txt
 	then	echo "...Apache installed"
-	else    echo "...Apache not installed"
+	else    echo "...Apache not installed" && exit 0
 fi
 if grep -q "mysql" $DOWNDIR/dpkg.txt
         then    echo "...MySQL installed"
-        else    echo "...MySQL not installed"
+        else    echo "...MySQL not installed" && exit 0
 fi
 if grep -q "php" $DOWNDIR/dpkg.txt
         then    echo "...PHP installed"
-        else    echo "...PHP not installed"
+        else    echo "...PHP not installed" && exit 0
 fi
 
 # Update OS
@@ -65,7 +65,7 @@ ln -s /usr/bin/fping /usr/sbin/fping
 sed -i 's/# PidFile=/PidFile=/g' /usr/local/zabbix/etc/zabbix_server.conf
 sed -i 's/# PidFile=/PidFile=/g' /usr/local/zabbix/etc/zabbix_agentd.conf
 mkdir $WWWPATH/zabbix
-cp -a $DOWNDIR/frontends/php/. $WWWPATH/zabbix
+cp -a $DOWNDIR/zabbix-$VERSION/frontends/php/. $WWWPATH/zabbix
 service apache2 restart
 
 
