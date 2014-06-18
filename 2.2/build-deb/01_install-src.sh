@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01a Alpha02
+# Version: 01a Alpha04
 #  Status: Not Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -12,6 +12,26 @@
 
 # Installer variables
 DOWNDIR="/tmp"
+MYSQLUSER="root"
+MYSQLPASS="c0ntr0l"
+WWWPATH="/var/www/"  #Ubuntu 14.04 uses /var/www/html
+VERSION="2.2.3"
+
+# Verify LAMP is installed
+echo "Verifying LAMP installation..."
+dpkg --list > $DOWNDIR/dpkg.txt
+if grep -q "apache" $DOWNDIR/dpkg.txt
+	then	echo "...Apache installed"
+	else    echo "...Apache not installed"
+fi
+if grep -q "mysql" $DOWNDIR/dpkg.txt
+        then    echo "...MySQL installed"
+        else    echo "...MySQL not installed"
+fi
+if grep -q "php" $DOWNDIR/dpkg.txt
+        then    echo "...PHP installed"
+        else    echo "...PHP not installed"
+fi
 
 # Update OS
 apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
@@ -20,31 +40,32 @@ apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
 apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping
 
 # Download Source
-wget http://softlayer-dal.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/2.2.3/zabbix-2.2.3.tar.gz
-tar -zxvf zabbix-2.*tar.gz
+wget --no-check-certificate -N http://softlayer-dal.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSION/zabbix-$VERSION.tar.gz -P $DOWNDIR/
+tar -zxvf $DOWNDIR/zabbix-$VERSION.tar.gz
+mv zabbix-$VERSION $DOWNDIR
 
 # Add Zabbix user
 groupadd zabbix
 useradd -g zabbix zabbix
 
 # Install Source
-cd zabbix-2.*
-./configure --enable-server --enable-agent --with-mysql --with-net-snmp --with-libcurl
+cd $DOWNDIR/zabbix-$VERSION
+./configure --prefix=/usr/local/zabbix --enable-server --enable-agent --with-mysql --with-net-snmp --with-libcurl
 make install
 
-# MySQL Databases
-mysql -uroot -p
-create database zabbix character set utf8 collate utf8_bin;
-quit;
-mysql -uroot -p zabbix < database/mysql/schema.sql
-mysql -uroot -p zabbix < database/mysql/images.sql
-mysql -uroot -p zabbix < database/mysql/data.sql
+# MySQL Database
+mysql -u$MYSQLUSER -p$MYSQLPASS -e "create database zabbix character set utf8 collate utf8_bin"
+mysql -u$MYSQLUSER -p$MYSQLPASS zabbix -e "create table schema"
+mysql -u$MYSQLUSER -p$MYSQLPASS zabbix < $DOWNDIR/zabbix-$VERSION/database/mysql/schema.sql
+mysql -u$MYSQLUSER -p$MYSQLPASS zabbix < $DOWNDIR/zabbix-$VERSION/database/mysql/images.sql
+mysql -u$MYSQLUSER -p$MYSQLPASS zabbix < $DOWNDIR/zabbix-$VERSION/database/mysql/data.sql
 
-# Notes
+# Post Install Tweaks
 ln -s /usr/bin/fping /usr/sbin/fping
-adjust zabbix_server.conf -> uncomment and delete space before: PidFile=/tmp/zabbix_server.pid (same for agentd)
-cp -a frontends/php/. /var/www/html
-Adjust php variables
+sed -i 's/# PidFile=/PidFile=/g' /usr/local/zabbix/etc/zabbix_server.conf
+sed -i 's/# PidFile=/PidFile=/g' /usr/local/zabbix/etc/zabbix_agentd.conf
+mkdir $WWWPATH/zabbix
+cp -a $DOWNDIR/frontends/php/. $WWWPATH/zabbix
 service apache2 restart
 
 
