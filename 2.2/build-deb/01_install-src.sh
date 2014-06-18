@@ -1,7 +1,7 @@
 #!/bin/bash
 ##########################################
-# Version: 01a Alpha04
-#  Status: Not Functional
+# Version: 01a
+#  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
 #      OS: Ubuntu/Debian 64-Bit
@@ -13,8 +13,8 @@
 # Installer variables
 DOWNDIR="/tmp"
 MYSQLUSER="root"
-MYSQLPASS="password"
-WWWPATH="/var/www/"  #Ubuntu 14.04 uses /var/www/html
+MYSQLPASS="pass"
+WWWPATH="/var/www"  #Ubuntu 14.04 uses /var/www/html
 VERSION="2.2.3"
 
 # Verify LAMP is installed
@@ -55,7 +55,6 @@ make install
 
 # MySQL Database
 mysql -u$MYSQLUSER -p$MYSQLPASS -e "create database zabbix character set utf8 collate utf8_bin"
-mysql -u$MYSQLUSER -p$MYSQLPASS zabbix -e "create table schema"
 mysql -u$MYSQLUSER -p$MYSQLPASS zabbix < $DOWNDIR/zabbix-$VERSION/database/mysql/schema.sql
 mysql -u$MYSQLUSER -p$MYSQLPASS zabbix < $DOWNDIR/zabbix-$VERSION/database/mysql/images.sql
 mysql -u$MYSQLUSER -p$MYSQLPASS zabbix < $DOWNDIR/zabbix-$VERSION/database/mysql/data.sql
