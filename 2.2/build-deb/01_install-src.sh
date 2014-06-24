@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01a
+# Version: 01b
 #  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -15,7 +15,7 @@ DOWNDIR="/tmp"
 MYSQLUSER="root"
 MYSQLPASS="pass"
 WWWPATH="/var/www"  #Ubuntu 14.04 uses /var/www/html
-VERSION="2.2.3"
+VERSION="2.2.2"
 
 # Verify LAMP is installed
 echo "Verifying LAMP installation..."
