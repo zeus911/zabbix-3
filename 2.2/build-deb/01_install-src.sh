@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01b
+# Version: 01c
 #  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -13,7 +13,7 @@
 # Installer variables
 DOWNDIR="/tmp"
 MYSQLUSER="root"
-MYSQLPASS="pass"
+MYSQLPASS="c0ntr0l"
 WWWPATH="/var/www"  #Ubuntu 14.04 uses /var/www/html
 VERSION="2.2.2"
 
@@ -37,7 +37,7 @@ fi
 apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
 
 # Required Packages
-apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping
+apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping nmap traceroute
 
 # Download Source
 wget --no-check-certificate -N http://softlayer-dal.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSION/zabbix-$VERSION.tar.gz -P $DOWNDIR/
