@@ -7,13 +7,17 @@
 #      OS: Ubuntu/Debian 64-Bit
 ##########################################
 
-# Notes
-# Make sure that Apache, MySQL, and PHP are installed!
+# Beginning Script Message
+clear
+echo && echo "Welcome to the Zabbix install script for Ubuntu and Debian!" && echo
+echo "*WARNING*: This script will update your OS."
+echo "           Make sure to make a backup and/or take a snapshot!" && echo && sleep 5
+echo "...Begin, we will, learn you must." && sleep 1
 
 # Installer variables
 DOWNDIR="/tmp"
 MYSQLUSER="root"
-MYSQLPASS="password"
+MYSQLPASS=$1	#Put your MySQL password after the script, e.g. ./script.sh password
 WWWPATH="/var/www/html"  #Ubuntu 14.04 uses /var/www/html
 VERSION="2.2.2"
 
