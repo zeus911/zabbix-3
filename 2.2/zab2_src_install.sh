@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01d
+# Version: 01e
 #  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -15,11 +15,12 @@ echo "           Make sure to make a backup and/or take a snapshot!" && echo && 
 echo "...Begin, we will, learn you must." && sleep 1
 
 # Installer variables
-DOWNDIR="/tmp"
-MYSQLUSER="root"
-MYSQLPASS=$1	#Put your MySQL password after the script, e.g. ./script.sh password
+DOWNDIR="~/tmp"
+## Put your MySQL credentials after the script, ./zab2_src_install.sh root password
+MYSQLUSER=$1
+MYSQLPASS=$2
 WWWPATH="/var/www/html"  #Ubuntu 14.04 uses /var/www/html
-VERSION="2.2.2"
+VERSION="2.2.4"
 
 # Verify LAMP is installed
 echo "Verifying LAMP installation..."
@@ -44,6 +45,7 @@ apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
 apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping nmap traceroute
 
 # Download Source
+mkdir $DOWNDIR
 wget --no-check-certificate -N http://softlayer-dal.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSION/zabbix-$VERSION.tar.gz -P $DOWNDIR/
 tar -zxvf $DOWNDIR/zabbix-$VERSION.tar.gz
 mv zabbix-$VERSION $DOWNDIR
@@ -54,7 +56,7 @@ useradd -g zabbix zabbix
 
 # Install Source
 cd $DOWNDIR/zabbix-$VERSION
-./configure --prefix=/usr/local/zabbix --enable-server --enable-agent --with-mysql --with-net-snmp --with-libcurl
+./configure --enable-server --enable-agent --with-mysql --with-net-snmp --with-libcurl
 make install
 
 # MySQL Database
@@ -65,8 +67,8 @@ mysql -u$MYSQLUSER -p$MYSQLPASS zabbix < $DOWNDIR/zabbix-$VERSION/database/mysql
 
 # Post Install Tweaks
 ln -s /usr/bin/fping /usr/sbin/fping
-sed -i 's/# PidFile=/PidFile=/g' /usr/local/zabbix/etc/zabbix_server.conf
-sed -i 's/# PidFile=/PidFile=/g' /usr/local/zabbix/etc/zabbix_agentd.conf
+sed -i 's/# PidFile=/PidFile=/g' /usr/local/etc/zabbix_server.conf
+sed -i 's/# PidFile=/PidFile=/g' /usr/local/etc/zabbix_agentd.conf
 mkdir $WWWPATH/zabbix
 cp -a $DOWNDIR/zabbix-$VERSION/frontends/php/. $WWWPATH/zabbix
 service apache2 restart
