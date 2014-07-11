@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01e
+# Version: 01f
 #  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -24,6 +24,7 @@ VERSION="2.2.4"
 
 # Verify LAMP is installed
 echo "Verifying LAMP installation..."
+mkdir $DOWNDIR
 dpkg --list > $DOWNDIR/dpkg.txt
 if grep -q "apache" $DOWNDIR/dpkg.txt
 	then	echo "...Apache installed"
@@ -45,7 +46,6 @@ apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
 apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping nmap traceroute
 
 # Download Source
-mkdir $DOWNDIR
 wget --no-check-certificate -N http://softlayer-dal.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSION/zabbix-$VERSION.tar.gz -P $DOWNDIR/
 tar -zxvf $DOWNDIR/zabbix-$VERSION.tar.gz
 mv zabbix-$VERSION $DOWNDIR
