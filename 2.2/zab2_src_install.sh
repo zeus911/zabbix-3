@@ -15,7 +15,7 @@ echo "           Make sure to make a backup and/or take a snapshot!" && echo && 
 echo "...Begin, we will, learn you must." && sleep 1
 
 # Installer variables
-DOWNDIR="~/tmp"
+DOWNDIR=~/tmp
 ## Put your MySQL credentials after the script, ./zab2_src_install.sh root password
 MYSQLUSER=$1
 MYSQLPASS=$2
