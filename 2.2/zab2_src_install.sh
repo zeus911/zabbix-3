@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01f
+# Version: 01g
 #  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -19,8 +19,8 @@ DOWNDIR=~/tmp
 ## Put your MySQL credentials after the script, ./zab2_src_install.sh root password
 MYSQLUSER=$1
 MYSQLPASS=$2
-WWWPATH="/var/www/html"  #Ubuntu 14.04 uses /var/www/html
-VERSION="2.2.4"
+WWWPATH="/var/www/html"
+VERSION="2.2.5"
 
 # Verify LAMP is installed
 echo "Verifying LAMP installation..."
