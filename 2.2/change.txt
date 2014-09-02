@@ -1,0 +1,11 @@
+##########################################
+# Version: 01a
+# http://hydruid-blog.com/category/zabbix/
+##########################################
+
+Description:
+This text file is the version changelog for the scripts in this directory.
+
+Files:
+ zo425_ubuntu-debian.sh:
+        09-02-14 - 01h: Changed zabbix version from 2.2.5 to 2.2.6
