@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01g
+# Version: 01h
 #  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -20,7 +20,7 @@ DOWNDIR=~/tmp
 MYSQLUSER=$1
 MYSQLPASS=$2
 WWWPATH="/var/www/html"
-VERSION="2.2.5"
+VERSION="2.2.6"
 
 # Verify LAMP is installed
 echo "Verifying LAMP installation..."
