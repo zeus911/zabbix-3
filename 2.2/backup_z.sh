@@ -25,6 +25,8 @@ sleep 5
 $kill1
 $kill2
 sleep 5
+$kill1
+$kill2
 
 # Directory Backup
 echo "...Starting Directory Backup"
