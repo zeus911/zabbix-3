@@ -17,3 +17,6 @@ else
 fi
 
 exit 0
+
+##Example crontab -e
+#*/15 * * * * /home/bob/cron.sh
