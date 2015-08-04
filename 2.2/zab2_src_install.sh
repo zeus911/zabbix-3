@@ -1,6 +1,6 @@
 #!/bin/bash
 ##########################################
-# Version: 01j
+# Version: 01k
 #  Status: Functional
 #   Notes: Under Development
 #  Zabbix: 2.2 Stable
@@ -46,7 +46,7 @@ apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
 apt-get install build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping nmap traceroute
 
 # Download Source
-wget --no-check-certificate -N http://softlayer-dal.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSION/zabbix-$VERSION.tar.gz -P $DOWNDIR/
+wget --no-check-certificate -N http://iweb.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSION/zabbix-$VERSION.tar.gz -P $DOWNDIR/
 tar -zxvf $DOWNDIR/zabbix-$VERSION.tar.gz
 mv zabbix-$VERSION $DOWNDIR
 
