@@ -20,7 +20,7 @@ DOWNDIR=~/tmp
 MYSQLUSER=$1
 MYSQLPASS=$2
 WWWPATH="/var/www/html"
-VERSION="2.2.9"
+VERSION="2.4.4"
 
 # Verify LAMP is installed
 echo "Verifying LAMP installation..."
