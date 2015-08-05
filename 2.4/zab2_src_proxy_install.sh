@@ -45,8 +45,6 @@ make install
 # MySQL Database
 mysql -u$MYSQLUSER -p$MYSQLPASS -e "create database zabbix_proxy character set utf8 collate utf8_bin"
 mysql -u$MYSQLUSER -p$MYSQLPASS zabbix_proxy < $DOWNDIR/zabbix-$VERSION/database/mysql/schema.sql
-mysql -u$MYSQLUSER -p$MYSQLPASS zabbix_proxy < $DOWNDIR/zabbix-$VERSION/database/mysql/images.sql
-mysql -u$MYSQLUSER -p$MYSQLPASS zabbix_proxy < $DOWNDIR/zabbix-$VERSION/database/mysql/data.sql
 
 # Post Install Tweaks
 ln -s /usr/bin/fping /usr/sbin/fping
