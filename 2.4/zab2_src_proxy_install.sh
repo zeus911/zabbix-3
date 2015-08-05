@@ -25,7 +25,7 @@ VERSION="2.4.4"
 apt-get update
 
 # Required Packages
-apt-get install mysql-server mysql-client build-essential mysql-client libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping nmap traceroute
+apt-get install mysql-server mysql-client build-essential libmysqlclient-dev libsnmp-dev libcurl4-gnutls-dev php5-gd fping nmap traceroute
 
 # Download Source
 wget --no-check-certificate -N http://iweb.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/$VERSION/zabbix-$VERSION.tar.gz -P $DOWNDIR/
